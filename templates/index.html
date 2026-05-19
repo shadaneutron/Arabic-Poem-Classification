@@ -1,0 +1,758 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ديوان الشعر العربي - تصنيف العصور</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --parchment: #f4e8d3;
+            --parchment-dark: #e9d8bc;
+            --olive: #3d5a3f;
+            --olive-dark: #2a3d2b;
+            --teal: #2c4a4a;
+            --teal-dark: #1e3333;
+            --gold: #b8860b;
+            --gold-light: #d4a017;
+            --copper: #b87333;
+            --ink: #1a1a1a;
+            --ink-light: #3a3a3a;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+            color: var(--ink);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(184, 134, 11, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(61, 90, 63, 0.03) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-letters {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .floating-letter {
+            position: absolute;
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            color: rgba(184, 134, 11, 0.1);
+            animation: float 20s infinite ease-in-out;
+            user-select: none;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.1;
+            }
+            50% {
+                transform: translateY(-30px) rotate(5deg);
+                opacity: 0.2;
+            }
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .manuscript-border {
+            position: relative;
+            padding: 40px;
+            background: linear-gradient(135deg, #f9f2e6 0%, var(--parchment) 100%);
+            border: 8px double var(--gold);
+            box-shadow: 
+                0 0 0 3px var(--parchment-dark),
+                0 10px 40px rgba(0, 0, 0, 0.15),
+                inset 0 0 60px rgba(184, 134, 11, 0.05);
+            margin-bottom: 40px;
+        }
+        
+        .manuscript-border::before,
+        .manuscript-border::after {
+            content: '❧';
+            position: absolute;
+            font-size: 2rem;
+            color: var(--gold);
+        }
+        
+        .manuscript-border::before {
+            top: 15px;
+            left: 20px;
+        }
+        
+        .manuscript-border::after {
+            bottom: 15px;
+            right: 20px;
+            transform: scaleX(-1);
+        }
+        
+        header {
+            text-align: center;
+            padding: 50px 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .decorative-line {
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(to left, transparent, var(--gold), transparent);
+            margin: 20px auto;
+            position: relative;
+        }
+        
+        .decorative-line::before {
+            content: '◆';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--gold);
+            font-size: 1.2rem;
+            background: var(--parchment);
+            padding: 0 10px;
+        }
+        
+        h1 {
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--olive-dark);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+        
+        .subtitle {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
+            color: var(--teal);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 2;
+        }
+        
+        .hero-quote {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--ink-light);
+            text-align: center;
+            padding: 40px 60px;
+            margin: 40px auto;
+            max-width: 700px;
+            position: relative;
+            background: rgba(184, 134, 11, 0.03);
+            border-right: 4px solid var(--gold);
+            border-left: 4px solid var(--gold);
+        }
+        
+        .hero-quote::before,
+        .hero-quote::after {
+            content: '\"';
+            font-size: 4rem;
+            font-family: 'Amiri', serif;
+            color: var(--gold);
+            opacity: 0.4;
+            position: absolute;
+        }
+        
+        .hero-quote::before {
+            top: -10px;
+            right: 30px;
+        }
+        
+        .hero-quote::after {
+            bottom: -30px;
+            left: 30px;
+        }
+        
+        .section-title {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            color: var(--olive);
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(to left, transparent, var(--gold), transparent);
+            margin: 15px auto 0;
+        }
+        
+        .card {
+            background: linear-gradient(180deg, #faf6ee 0%, var(--parchment) 100%);
+            border: 2px solid var(--gold);
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 
+                0 5px 20px rgba(0, 0, 0, 0.1),
+                inset 0 0 30px rgba(184, 134, 11, 0.03);
+            position: relative;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            bottom: 10px;
+            left: 10px;
+            border: 1px solid rgba(184, 134, 11, 0.2);
+            pointer-events: none;
+        }
+        
+        .form-group {
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        label {
+            display: block;
+            font-family: 'Amiri', serif;
+            font-size: 1.4rem;
+            color: var(--olive-dark);
+            margin-bottom: 15px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 220px;
+            padding: 30px;
+            border: 2px solid var(--gold);
+            background: linear-gradient(135deg, #fffbf4 0%, var(--parchment) 100%);
+            color: var(--ink);
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem;
+            line-height: 2.2;
+            resize: vertical;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--olive);
+            box-shadow: 
+                inset 0 2px 10px rgba(0, 0, 0, 0.05),
+                0 0 0 3px rgba(61, 90, 63, 0.1);
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        button {
+            font-family: 'Amiri', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--parchment);
+            background: linear-gradient(135deg, var(--olive) 0%, var(--olive-dark) 100%);
+            border: 3px solid var(--gold);
+            padding: 18px 60px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        button:hover::before {
+            left: 100%;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+        
+        button:active {
+            transform: translateY(-1px);
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(184, 134, 11, 0.2);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 25px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading p {
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem;
+            color: var(--ink-light);
+        }
+        
+        .result-card {
+            margin-top: 45px;
+            padding: 45px;
+            background: linear-gradient(135deg, #faf6ee 0%, var(--parchment) 100%);
+            border: 3px solid var(--olive);
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            bottom: 15px;
+            left: 15px;
+            border: 1px solid rgba(61, 90, 63, 0.2);
+            pointer-events: none;
+        }
+        
+        .result-title {
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            color: var(--olive-dark);
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .prediction {
+            text-align: center;
+            padding: 40px;
+            background: rgba(61, 90, 63, 0.05);
+            border: 2px solid var(--gold);
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .prediction-era {
+            font-family: 'Amiri', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--olive);
+            margin-bottom: 15px;
+        }
+        
+        .prediction-label {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
+            color: var(--teal);
+        }
+        
+        .probabilities {
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .prob-header {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            color: var(--olive-dark);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .prob-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px dashed rgba(184, 134, 11, 0.3);
+        }
+        
+        .prob-item:last-child {
+            border-bottom: none;
+        }
+        
+        .prob-era {
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem;
+            color: var(--ink);
+            min-width: 200px;
+        }
+        
+        .prob-bar-container {
+            flex-grow: 1;
+            margin: 0 25px;
+            height: 14px;
+            background: rgba(61, 90, 63, 0.1);
+            position: relative;
+        }
+        
+        .prob-bar-container::before,
+        .prob-bar-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 14px;
+            background: var(--gold);
+        }
+        
+        .prob-bar-container::before {
+            right: -4px;
+            top: 0;
+        }
+        
+        .prob-bar-container::after {
+            left: -4px;
+            top: 0;
+        }
+        
+        .prob-bar {
+            height: 100%;
+            background: linear-gradient(to left, var(--olive), var(--olive-dark));
+            transition: width 1s ease;
+        }
+        
+        .prob-value {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
+            min-width: 70px;
+            text-align: left;
+        }
+        
+        .info-section {
+            margin-top: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .info-card {
+            padding: 35px 25px;
+            background: linear-gradient(180deg, #faf6ee 0%, var(--parchment) 100%);
+            border: 2px solid var(--gold);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .info-card h3 {
+            font-family: 'Amiri', serif;
+            font-size: 1.6rem;
+            color: var(--olive);
+            margin-bottom: 15px;
+        }
+        
+        .info-card p {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.05rem;
+            color: var(--ink-light);
+            line-height: 2;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 70px;
+            border-top: 3px double var(--gold);
+            position: relative;
+            z-index: 1;
+        }
+        
+        footer p {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            color: var(--ink-light);
+            margin-bottom: 10px;
+        }
+        
+        .footer-ornament {
+            font-size: 2rem;
+            color: var(--gold);
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-quote {
+                font-size: 1.4rem;
+                padding: 30px 30px;
+            }
+            
+            .manuscript-border {
+                padding: 25px;
+            }
+            
+            .prediction-era {
+                font-size: 2.2rem;
+            }
+            
+            .prob-era {
+                min-width: 150px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-letters" id="floatingLetters"></div>
+    
+    <div class="container">
+        <div class="manuscript-border">
+            <header>
+                <h1>ديوان الشعر العربي</h1>
+                <div class="decorative-line"></div>
+                <p class="subtitle">
+                    منصة ذكاء اصطناعي لتحليل وتصنيف الشعر العربي إلى العصور التاريخية
+                </p>
+            </header>
+            
+            <div class="hero-quote">
+                الشعر أديان القلوب ومزارع الحكايم
+            </div>
+            
+            <div class="card">
+                <h2 class="section-title">تحليل الشعر</h2>
+                
+                <form id="poemForm" method="POST">
+                    <div class="form-group">
+                        <label for="poemText">أدخل النص الشعري:</label>
+                        <textarea 
+                            id="poemText" 
+                            name="poem_text" 
+                            placeholder="أدخل بيتًا شعريًا أو قصيدة كاملة هنا..."
+                            required
+                        >{% if request.form.poem_text %}{{ request.form.poem_text }}{% endif %}</textarea>
+                    </div>
+                    
+                    <div class="button-container">
+                        <button type="submit">تحليل وتصنيف</button>
+                    </div>
+                </form>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>جاري تحليل النص الشعري...</p>
+                </div>
+                
+                {% if prediction %}
+                <div class="result-card">
+                    <h3 class="result-title">نتيجة التحليل</h3>
+                    
+                    <div class="prediction">
+                        <div class="prediction-era">{{ prediction }}</div>
+                        <div class="prediction-label">العصر التاريخي المتوقع</div>
+                    </div>
+                    
+                    {% if probabilities %}
+                    <div class="probabilities">
+                        <h4 class="prob-header">توزيع الاحتمالات:</h4>
+                        {% for prob in probabilities %}
+                        <div class="prob-item">
+                            <span class="prob-era">{{ prob.era }}</span>
+                            <div class="prob-bar-container">
+                                <div class="prob-bar" style="width: {{ prob.probability * 100 }}%;"></div>
+                            </div>
+                            <span class="prob-value">{{ "%.1f"|format(prob.probability * 100) }}%</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="info-section">
+                <h2 class="section-title">مقارنة النماذج</h2>
+                <div class="card">
+                    <table style="width: 100%; border-collapse: collapse; font-family: 'Cairo', sans-serif; font-size: 1rem;">
+                        <thead>
+                            <tr style="background: rgba(61, 90, 63, 0.1);">
+                                <th style="padding: 15px; border-bottom: 2px solid var(--gold); text-align: right;">النموذج</th>
+                                <th style="padding: 15px; border-bottom: 2px solid var(--gold); text-align: center;">الدقة</th>
+                                <th style="padding: 15px; border-bottom: 2px solid var(--gold); text-align: center;">الدقة الدقيقة</th>
+                                <th style="padding: 15px; border-bottom: 2px solid var(--gold); text-align: center;">الاستدعاء</th>
+                                <th style="padding: 15px; border-bottom: 2px solid var(--gold); text-align: center;">F1-Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in model_comparison %}
+                            <tr>
+                                <td style="padding: 15px; border-bottom: 1px dashed rgba(184, 134, 11, 0.3); text-align: right; font-family: 'Amiri', serif;">{{ row.Model }}</td>
+                                <td style="padding: 15px; border-bottom: 1px dashed rgba(184, 134, 11, 0.3); text-align: center;">{{ "%.4f"|format(row.Accuracy) }}</td>
+                                <td style="padding: 15px; border-bottom: 1px dashed rgba(184, 134, 11, 0.3); text-align: center;">{{ "%.4f"|format(row.Precision) }}</td>
+                                <td style="padding: 15px; border-bottom: 1px dashed rgba(184, 134, 11, 0.3); text-align: center;">{{ "%.4f"|format(row.Recall) }}</td>
+                                <td style="padding: 15px; border-bottom: 1px dashed rgba(184, 134, 11, 0.3); text-align: center;">{{ "%.4f"|format(row['F1-Score']) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2 class="section-title">تجربة Transformer</h2>
+                <div class="card">
+                    <h3 style="font-family: 'Amiri', serif; font-size: 1.8rem; color: var(--olive-dark); margin-bottom: 20px;">AraBERT - نموذج تحويل</h3>
+                    <p style="font-family: 'Cairo', sans-serif; font-size: 1.1rem; color: var(--ink-light); line-height: 2; margin-bottom: 20px;">
+                        قمنا بتجربة نموذج AraBERT (من نماذج Transformers) كمقارنة مع النماذج التقليدية للتعلم الآلي. 
+                        على الرغم من القوة الكبيرة لنماذج Transformers في العديد من المهام، وجدنا أن النماذج التقليدية (مثل LinearSVC) تعمل بشكل أفضل على هذا المحدد من البيانات.
+                    </p>
+                    <h4 style="font-family: 'Amiri', serif; font-size: 1.5rem; color: var(--olive); margin-bottom: 15px;">لماذا النماذج التقليدية أفضل؟</h4>
+                    <ul style="font-family: 'Cairo', sans-serif; font-size: 1.05rem; color: var(--ink-light); line-height: 2.2; padding-right: 20px;">
+                        <li>البيانات مستقرة نسبيًا من حيث الأسلوب اللغوي العصري</li>
+                        <li>الخصائص النحوية (TF-IDF) تكفي لالتقاط الأنماط المميزة للعصور المختلفة</li>
+                        <li>النماذج التقليدية تتطلب أقل حجم من البيانات للتدريب الفعال</li>
+                        <li>أسرع في التدريب والتطبيق مقارنةً بنماذج Transformers</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2 class="section-title">عن المنصة</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">📜</div>
+                        <h3>المعالجة النحوية</h3>
+                        <p>تنظيف وتحليل النصوص العربية بإزالة التشكيل والتطويل وتوحيد الحروف</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">🤖</div>
+                        <h3>الذكاء الاصطناعي</h3>
+                        <p>تدريب ومقارنة عدة نماذج تعلم آلي للوصول لأعلى دقة ممكنة</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">🏛️</div>
+                        <h3>التراث العربي</h3>
+                        <p>الاحتفاء بالتراث الشعري العربي والعمل على حفظه وتحليله</p>
+                    </div>
+                </div>
+            </div>
+            
+            <footer>
+                <div class="footer-ornament">❧ ✿ ❧</div>
+                <p>مشروع تعليمي - تصنيف الشعر العربي باستخدام الذكاء الاصطناعي</p>
+                <p>بني على حب الشعر العربي وتراثه العظيم</p>
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('poemForm').addEventListener('submit', function() {
+            document.getElementById('loading').style.display = 'block';
+        });
+        
+        const floatingLetters = ['ب', 'س', 'م', 'ا', 'ل', 'ه', 'و', 'ن', 'ع', 'ل'];
+        const lettersContainer = document.getElementById('floatingLetters');
+        
+        for (let i = 0; i < 15; i++) {
+            const letter = document.createElement('div');
+            letter.className = 'floating-letter';
+            letter.textContent = floatingLetters[Math.floor(Math.random() * floatingLetters.length)];
+            letter.style.left = Math.random() * 100 + '%';
+            letter.style.top = Math.random() * 100 + '%';
+            letter.style.animationDelay = Math.random() * 20 + 's';
+            letter.style.animationDuration = (15 + Math.random() * 15) + 's';
+            lettersContainer.appendChild(letter);
+        }
+    </script>
+</body>
+</html>
+

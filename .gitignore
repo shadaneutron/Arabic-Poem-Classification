@@ -1,0 +1,71 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Models and Data
+*.pkl
+*.joblib
+*.safetensors
+*.bin
+*.pt
+*.pth
+model.pkl
+tfidf_vectorizer.pkl
+label_encoder.pkl
+linearsvc_model.pkl
+logisticregression_model.pkl
+model_comparison.pkl
+*.csv
+Arabic_Poetry_Dataset.csv
+
+# Transformer Models and Checkpoints
+arabert_model/
+checkpoint*/
+logs/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
