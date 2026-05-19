@@ -211,6 +211,10 @@ The application features a beautiful, heritage-inspired design:
 - Smooth animations and transitions
 - Clear prediction display with probability bars
 
+<img width="2559" height="1232" alt="image" src="https://github.com/user-attachments/assets/6b2ec73d-40e3-4706-9c5d-d943a58d1f5e" />
+
+<img width="2559" height="1238" alt="image" src="https://github.com/user-attachments/assets/c960b3e3-d7d0-4cce-ab93-57c1729f3b93" />
+
 ---
 
 ## 🔮 Future Improvements
@@ -237,21 +241,7 @@ This is a strong portfolio project, but there's always room for growth:
 
 ---
 
-## 📝 License
 
-This project is for educational purposes and is part of a professional AI/ML portfolio.
 
----
 
-## 🙏 Acknowledgments
-
-- All poets and scholars who preserved this rich literary heritage
-- The open-source NLP community
-- Classical Arabic literature enthusiasts
-
----
-
-<p align="center">
-  <b>✨ Built with passion for Arabic poetry and practical AI ✨</b>
-</p>
 
